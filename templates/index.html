@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        div {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        div:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        input[type="text"], input[type="email"], input[type="submit"], textarea {
+            border: none;
+            border-radius: 7px;
+            padding: 12px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="text"], textarea {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 117, 140, 0.4);
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(135deg, #ff5d7a, #ff758c);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(255, 93, 122, 0.5);
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.02);
+            border: 1px solid #ffffff;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-top: 1rem;
+            color: #ffe5ec;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Django Mail App</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="address">To (comma-separated):</label>
+            <input id="address" type="text" name="address" placeholder="example1@gmail.com, example2@gmail.com" />
+        
+            <label for="subject">Subject:</label>
+            <input id="subject" type="text" name="subject" placeholder="Enter the subject" />
+        
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Write your message here"></textarea>
+
+            <input type="submit" value="Send Email">
+        </form>
+        <p>{{ result }}</p>
+    </div>
+</body>
+</html>
